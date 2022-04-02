@@ -1,0 +1,63 @@
+import pandas as pd
+from datetime import datetime
+import csv,sys
+from prettytable import PrettyTable 
+mt = PrettyTable(['Date','Description','Income','Expense','Total'])
+mt.add_autoindex('No')
+k =[]
+while True:
+    print("*** Main Menu *** \n       " )
+    print(" 1) Enter item \n 2) Display daily summary \n 3) Display month summary \n 4) Save to file \n 5) Load file \n 6) Exit \n     " )
+    E = int(input('Please select : '))
+    
+    if E==1:
+        print('Enter item using format : date +income/-expense description or <ENTER> to end.')
+        while True:
+            Word = str(input(": "))
+            Date = Word.partition(" ")[0]
+            Money_DT = Word.partition(" ")[2]
+            Money = Money_DT.partition(" ")[0] 
+            DT = Money_DT.partition(" ")[2] #Description
+            if "+" in Money :
+                CashP = Money.partition("+")[2]
+                FileCP = open("CashP.txt","a+")
+                FileCP.write(CashP+"\n")
+                FileCP.close
+            elif "-" in Money :
+                CashM = Money.partition("-")[2]
+                FileCM = open("CashM.txt","a+")
+                FileCM.write(CashM+"\n")
+                FileCM.close
+                #Write flie Complete!
+                file = open("Data.txt","a+")    #Read and write at the same time
+                file.write(Word+"\n")
+                file.close
+
+
+            elif Word == "":
+                break
+
+
+    elif E==2:
+        n = input('Enter date to display : ')
+        with open ("Data.txt", "r") as myfile:
+            data = myfile.read().splitlines()
+            if n != data:
+                print('T')
+        myfile.close()
+
+         
+
+
+    elif E==3:
+        pass
+
+    elif E==4:
+        pass
+
+    elif E==5:
+        pass
+                
+    elif E==6:
+        break
+
